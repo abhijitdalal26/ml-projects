@@ -1,0 +1,136 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Page base */
+body {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Main card */
+.app-container {
+  width: 100%;
+  max-width: 460px;
+  padding: 25px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Titles */
+.main-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #c084fc;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #c7d2fe;
+  margin-bottom: 30px;
+}
+
+/* Drawing canvas */
+.canvas-box {
+  background: #000;
+  border-radius: 16px;
+  padding: 6px;
+  display: inline-block;
+  border: 2px solid rgba(192, 132, 252, 0.7);
+  box-shadow: 0 0 30px rgba(192, 132, 252, 0.35);
+  touch-action: none;
+}
+
+#main-canvas {
+  border-radius: 12px;
+}
+
+/* Button */
+.controls {
+  margin-top: 18px;
+}
+
+.btn {
+  padding: 10px 28px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #a855f7, #22d3ee);
+  color: #020617;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* Prediction area */
+.prediction-panel {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Small labels */
+.label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #a5b4fc;
+  margin-bottom: 6px;
+}
+
+/* Prediction number */
+#prediction-text {
+  font-size: 4.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #c084fc, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+/* Mini input preview */
+.preview-box {
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 20px;
+}
+
+#mini-canvas {
+  background: #000;
+  border: 1px solid rgba(192, 132, 252, 0.8);
+  width: 56px;
+  height: 56px;
+  image-rendering: pixelated;
+  border-radius: 6px;
+}

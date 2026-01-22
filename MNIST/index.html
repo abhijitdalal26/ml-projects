@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-Time MNIST Predictor</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1 class="main-title">MNIST DIGIT PREDICTOR</h1>
+        <p class="subtitle">Real-time classification using Deep Learning</p>
+      </header>
+
+      <main class="drawing-area">
+        <div class="canvas-box">
+          <canvas id="main-canvas" width="280" height="280"></canvas>
+        </div>
+
+        <div class="controls">
+          <button id="clear-btn" class="btn btn-clear">Clear Canvas</button>
+        </div>
+      </main>
+
+      <section class="prediction-panel">
+        <div class="result-card">
+          <span class="label">DETECTED DIGIT</span>
+          <div id="prediction-text">?</div>
+        </div>
+
+        <div class="preview-box">
+          <span class="label">MODEL INPUT (28x28)</span>
+          <canvas id="mini-canvas" width="28" height="28"></canvas>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
