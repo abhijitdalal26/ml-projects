@@ -34,8 +34,8 @@ ctx.fillRect(0, 0, canvas.width, canvas.height); // Initial black background
 // converts screen coordinates -> canvas coordinates.
 const getPos = (e) => {
   const rect = canvas.getBoundingClientRect();
-  const x = (e.clientX || e.touches[0].clientX) - rect.left;
-  const y = (e.clientY || e.touches[0].clientY) - rect.top;
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
   return { x, y };
 };
 
@@ -60,9 +60,15 @@ const draw = (e) => {
   predictRealTime();
 };
 
+// Mouse events
 canvas.addEventListener("mousedown", startDrawing);
 canvas.addEventListener("mousemove", draw);
 window.addEventListener("mouseup", stopDrawing);
+
+// Touch events (mobile support)
+canvas.addEventListener("touchstart", (e) => { e.preventDefault(); startDrawing(e.touches[0]); }, { passive: false });
+canvas.addEventListener("touchmove", (e) => { e.preventDefault(); draw(e.touches[0]); }, { passive: false });
+canvas.addEventListener("touchend", stopDrawing);
 
 // 5. THE PREDICTION PIPELINE
 function predictRealTime() {

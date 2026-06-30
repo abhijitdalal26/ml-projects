@@ -60,6 +60,7 @@ body {
 
 #main-canvas {
   border-radius: 12px;
+  touch-action: none;
 }
 
 /* Button */
