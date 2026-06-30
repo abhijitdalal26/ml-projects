@@ -97,6 +97,108 @@ Classic DLS assignments, each turned into a clean notebook or deployed demo.
 
 ---
 
+### Explainability & Interpretability (XAI)
+A whole area that's missing from most course lists but essential in real ML work.
+
+- **SHAP values** — explain any model's predictions on tabular data; show which features matter most
+- **LIME** — locally approximate any black-box model; explain a single image or text prediction
+- **Grad-CAM** — highlight which pixels a CNN looked at when making a decision; overlay heatmap on image
+- **Integrated Gradients** — attribution method for deep nets; visualize input importance
+- **Partial dependence plots** — show how one feature affects predictions across its range
+- **Confusion matrix deep-dive notebook** — per-class error analysis, worst-case sample inspection
+
+---
+
+### Time Series
+- **Stock price prediction (LSTM)** — predict next-day price; show prediction vs actual chart
+- **ARIMA vs LSTM comparison** — classical vs deep learning on the same time series dataset
+- **Anomaly detection in time series** — flag unusual spikes in sensor/server data
+- **Weather forecasting** — multi-step prediction using stacked LSTMs or temporal CNNs
+- **ECG heartbeat classifier** — classify normal vs abnormal heartbeat from waveform data
+
+---
+
+### Modern Generative AI
+- **Diffusion model from scratch** — implement DDPM (denoising diffusion) on MNIST; watch images denoise
+- **Variational Autoencoder (VAE) — latent space explorer** — interpolate between two images in latent space
+- **Conditional GAN** — generate digits/faces conditioned on a class label
+- **Text-to-image with CLIP** — use OpenAI CLIP embeddings to search images by text description
+- **Stable Diffusion fine-tuning (DreamBooth)** — fine-tune on a few photos of a subject (notebook)
+
+---
+
+### Transformers & Modern Architectures
+- **Vision Transformer (ViT) from scratch** — patch-based image classification; compare to CNN
+- **BERT fine-tuning** — sentiment / topic classification with a pre-trained transformer
+- **GPT-2 fine-tuning** — fine-tune on a small custom text corpus; generate new text
+- **CLIP zero-shot classifier** — classify images using only text descriptions, no labeled training data
+- **DETR — object detection with transformers** — end-to-end detection without anchor boxes
+
+---
+
+### LLMs & Prompt Engineering
+- **RAG (Retrieval-Augmented Generation)** — build a Q&A bot over your own documents using embeddings + LLM
+- **LLM fine-tuning with LoRA** — efficiently fine-tune a small LLM (e.g. Mistral 7B) on custom data
+- **Prompt engineering notebook** — systematically compare zero-shot, few-shot, chain-of-thought prompting
+- **Embedding similarity search** — encode sentences, find nearest neighbors, build a semantic search demo
+- **AI agent from scratch** — build a simple tool-using agent with function calling (notebook)
+
+---
+
+### Graph Neural Networks (GNNs)
+- **Node classification** — classify nodes in a citation network (Cora dataset) with GCN
+- **Link prediction** — predict missing edges in a social graph
+- **Molecular property prediction** — predict if a molecule is toxic using graph structure (notebook)
+
+---
+
+### Speech & Audio
+- **Speech command recognizer** — classify spoken words (yes/no/stop/go) from audio clips; deploy in browser (Web Audio API)
+- **Speaker identification** — verify "is this the same speaker?" using mel-spectrograms + CNN
+- **Speech emotion recognition** — classify emotion from voice (angry/happy/sad)
+
+---
+
+### Medical & Science Applications
+- **Chest X-ray classifier** — detect pneumonia from X-rays (Kaggle dataset); discuss medical AI ethics
+- **Brain tumor segmentation** — U-Net on MRI scans; pixel-level tumor detection (notebook)
+- **Drug discovery notebook** — predict molecular activity using fingerprints + ML
+- **COVID-19 trend forecasting** — time series prediction on real case data
+
+---
+
+### Bayesian & Probabilistic ML
+- **Bayesian linear regression** — uncertainty-aware predictions; show confidence intervals
+- **Gaussian Process regression** — smooth interpolation with uncertainty bands; interactive plot
+- **Monte Carlo dropout** — turn dropout into uncertainty estimation at inference time
+- **Naive Bayes from scratch** — spam classifier built manually; derive the math in the notebook
+
+---
+
+### Self-Supervised & Contrastive Learning
+- **SimCLR** — learn image representations without labels using contrastive loss
+- **Masked Autoencoder (MAE)** — reconstruct masked image patches; pre-train a ViT
+- **Word2Vec contrastive** — understand skip-gram as a contrastive objective
+
+---
+
+### Model Optimization & Deployment
+- **Quantization notebook** — shrink a trained model from float32 to int8; measure accuracy vs size tradeoff
+- **Knowledge distillation** — train a small student network to mimic a large teacher
+- **ONNX export pipeline** — export any Keras/PyTorch model to ONNX, run in browser via onnxruntime-web
+- **Model drift detection** — monitor how predictions shift over time on new data (notebook)
+
+---
+
+### Fun / Portfolio Showcases
+- **Neural network playground** — interactive visualizer (like TF Playground) built from scratch
+- **Pose estimation** — use MoveNet/PoseNet in browser to track body keypoints from webcam
+- **Real-time background blur** — segment person from background using MediaPipe; browser demo
+- **License plate reader** — detect and OCR license plates from uploaded photos
+- **Deepfake detector** — binary classifier to flag AI-generated face images
+
+---
+
 ### Computer Vision (original ideas)
 - **Fashion MNIST classifier** — same pipeline as MNIST but for clothing categories (shirt, shoe, bag…)
 - **Face emotion detector** — train on FER-2013, deploy webcam feed in browser using face-api.js or TF.js
