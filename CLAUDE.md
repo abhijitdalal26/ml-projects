@@ -9,6 +9,9 @@ Build ML/AI projects: train in Python (Jupyter notebook), then either deploy as 
 /MNIST/            → digit recognizer demo (deployed)
   train-model/     → Keras training notebook
   model/           → exported TF.js model weights
+/FashionMNIST/     → "Fashion Draw" sketch game (pipeline ready, awaiting trained model)
+  train-model/     → Keras training notebook (run on Colab)
+  model/           → exported TF.js model weights (drop in after running the notebook)
 ```
 
 ## Live site
@@ -18,6 +21,11 @@ https://abhijitdalal26.github.io/ml-projects/
 
 ## Completed
 - **MNIST Digit Recognizer** — CNN trained in Keras, deployed with TensorFlow.js. Draw a digit, get a real-time prediction.
+
+---
+
+## In progress
+- **Fashion Draw (Fashion MNIST game)** — Quick, Draw!-style game: app shows a random clothing category (T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt, Sneaker, Bag, Ankle boot), player has 20s to sketch it on canvas, CNN predicts in real time as you draw, round ends on a confident correct guess or when the timer hits zero. Web app (`FashionMNIST/index.html`, `main.css`, `script.js`) and training notebook (`FashionMNIST/train-model/FashionMNIST-Notebook.ipynb`) are built. **Blocked on**: running the notebook on Colab (no GPU locally) and dropping the exported `model.json` + weight shard into `FashionMNIST/model/` — see `FashionMNIST/model/README.md`. Once the model is in place, move this entry to Completed.
 
 ---
 

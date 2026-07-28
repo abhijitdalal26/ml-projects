@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion Draw — Quick Sketch Challenge</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1 class="main-title">FASHION DRAW</h1>
+        <p class="subtitle">Draw the item before time runs out. CNN + TensorFlow.js.</p>
+      </header>
+
+      <section class="hud">
+        <div class="hud-item">
+          <span class="label">DRAW</span>
+          <div id="prompt-text">—</div>
+        </div>
+        <div class="hud-item">
+          <span class="label">SCORE</span>
+          <div id="score-text">0</div>
+        </div>
+        <div class="hud-item">
+          <span class="label">TIME</span>
+          <div id="timer-text">20</div>
+        </div>
+      </section>
+
+      <div class="timer-bar-track">
+        <div id="timer-bar" class="timer-bar-fill"></div>
+      </div>
+
+      <main class="drawing-area">
+        <div class="canvas-box">
+          <canvas id="main-canvas" width="280" height="280"></canvas>
+          <div id="result-overlay" class="result-overlay hidden">
+            <span id="result-text"></span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="clear-btn" class="btn btn-secondary">Clear</button>
+          <button id="skip-btn" class="btn btn-secondary">Skip</button>
+          <button id="start-btn" class="btn btn-primary">Start Game</button>
+        </div>
+      </main>
+
+      <section class="prediction-panel">
+        <div class="result-card">
+          <span class="label">MODEL THINKS</span>
+          <div id="prediction-text">?</div>
+          <div id="confidence-text" class="confidence-text"></div>
+        </div>
+
+        <div class="preview-box">
+          <span class="label">MODEL INPUT (28x28)</span>
+          <canvas id="mini-canvas" width="28" height="28"></canvas>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
