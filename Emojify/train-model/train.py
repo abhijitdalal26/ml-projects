@@ -346,6 +346,41 @@ try:
 
     tfjs.converters.save_keras_model(model, MODEL_DIR)
     print(f"Exported TF.js model to {MODEL_DIR}/ (model.json + weight shards)")
+
+    # Keras 3 writes InputLayer config as "batch_shape", but the TF.js
+    # layers loader in the browser still only understands the older
+    # "batchInputShape" key — without this patch the browser throws
+    # "An InputLayer should be passed either a batchInputShape or an
+    # inputShape" and the model never loads.
+    model_json_path = os.path.join(MODEL_DIR, "model.json")
+    with open(model_json_path, encoding="utf8") as f:
+        model_json = json.load(f)
+    topology_config = model_json["modelTopology"].get(
+        "model_config", model_json["modelTopology"]
+    )["config"]
+    patched = 0
+    for layer in topology_config["layers"]:
+        if layer.get("class_name") == "InputLayer" and "batch_shape" in layer["config"]:
+            layer["config"]["batchInputShape"] = layer["config"].pop("batch_shape")
+            patched += 1
+    # Keras 3's converter also writes some weight names prefixed with the
+    # outer model's own name (e.g. "sequential/dense/kernel") while others
+    # (e.g. "embedding/embeddings") are left unprefixed. The browser loader
+    # expects every weight name to be layer-relative, so an inconsistent
+    # prefix causes "Provided weight data has no target variable: ...".
+    # Strip it everywhere for consistency.
+    model_name = topology_config.get("name", "sequential")
+    prefix = model_name + "/"
+    for group in model_json["weightsManifest"]:
+        for weight in group["weights"]:
+            if weight["name"].startswith(prefix):
+                weight["name"] = weight["name"][len(prefix):]
+                patched += 1
+
+    if patched:
+        with open(model_json_path, "w", encoding="utf8") as f:
+            json.dump(model_json, f)
+        print(f"Patched {patched} entries in model.json for TF.js compatibility")
 except ImportError:
     print(
         "tensorflowjs not installed. Run:\n"
