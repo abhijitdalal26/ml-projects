@@ -1,0 +1,178 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Page base */
+body {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Main card */
+.app-container {
+  width: 100%;
+  max-width: 460px;
+  padding: 25px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Titles */
+.main-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #c084fc;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #c7d2fe;
+  margin-bottom: 30px;
+}
+
+/* Text input */
+#review-input {
+  width: 100%;
+  resize: vertical;
+  min-height: 120px;
+  padding: 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+  background: #000;
+  border-radius: 16px;
+  border: 2px solid rgba(192, 132, 252, 0.7);
+  box-shadow: 0 0 30px rgba(192, 132, 252, 0.35);
+  outline: none;
+}
+
+#review-input::placeholder {
+  color: #6b7280;
+}
+
+/* Button */
+.controls {
+  margin-top: 18px;
+}
+
+.btn {
+  padding: 10px 28px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #a855f7, #22d3ee);
+  color: #020617;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Status / placeholder / error messages */
+.status-message {
+  margin-top: 14px;
+  font-size: 0.82rem;
+  color: #a5b4fc;
+  min-height: 1.2em;
+}
+
+.status-message.error {
+  color: #f87171;
+}
+
+/* Prediction area */
+.prediction-panel {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 20px;
+}
+
+/* Small labels */
+.label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #a5b4fc;
+  margin-bottom: 6px;
+}
+
+/* Prediction text */
+#prediction-text {
+  font-size: 2.4rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #c084fc, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Confidence bar */
+.confidence-box {
+  flex: 1;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 20px;
+  text-align: left;
+}
+
+.confidence-bar-track {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.confidence-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(135deg, #a855f7, #22d3ee);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+#confidence-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e5e7eb;
+}

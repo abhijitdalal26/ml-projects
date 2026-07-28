@@ -12,6 +12,15 @@ Build ML/AI projects: train in Python (Jupyter notebook), then either deploy as 
 /FashionMNIST/     → "Fashion Draw" sketch game (pipeline ready, awaiting trained model)
   train-model/     → Keras training notebook (run on Colab)
   model/           → exported TF.js model weights (drop in after running the notebook)
+/SentimentAnalyzer/ → IMDB sentiment analyzer (pipeline ready, awaiting trained model)
+  train-model/     → Keras training script (train.py, run on Colab/Kaggle)
+  model/           → exported TF.js model weights + vocab.json (drop in after running train.py)
+/ImageCaptioning/  → CNN (MobileNetV2) encoder + LSTM decoder image captioner (pipeline ready, awaiting trained model)
+  train-model/     → Keras training script (train.py, run on Kaggle — flickr8k dataset built in)
+  model/           → exported TF.js decoder + model/encoder/ (MobileNetV2) + tokenizer.json (drop in after running train.py)
+/Emojify/          → sentence-to-emoji demo (pipeline ready, awaiting trained model)
+  train-model/     → train.py, plain Python script (run on Colab/Kaggle)
+  model/           → exported TF.js model weights + vocab.json (drop in after running train.py)
 ```
 
 ## Live site
@@ -26,6 +35,9 @@ https://abhijitdalal26.github.io/ml-projects/
 
 ## In progress
 - **Fashion Draw (Fashion MNIST game)** — Quick, Draw!-style game: app shows a random clothing category (T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt, Sneaker, Bag, Ankle boot), player has 20s to sketch it on canvas, CNN predicts in real time as you draw, round ends on a confident correct guess or when the timer hits zero. Web app (`FashionMNIST/index.html`, `main.css`, `script.js`) and training notebook (`FashionMNIST/train-model/FashionMNIST-Notebook.ipynb`) are built. **Blocked on**: running the notebook on Colab (no GPU locally) and dropping the exported `model.json` + weight shard into `FashionMNIST/model/` — see `FashionMNIST/model/README.md`. Once the model is in place, move this entry to Completed.
+- **Image Captioning** — CNN encoder (frozen MobileNetV2, GlobalAveragePooling) + LSTM decoder trained on Flickr8k; upload a photo, get a generated caption. Web app (`ImageCaptioning/index.html`, `main.css`, `script.js`) loads the MobileNetV2 encoder and the decoder as separate TF.js models and runs greedy decoding (feed `<start>`, repeatedly predict next word up to `max_length` or `<end>`) fully client-side. Training script `ImageCaptioning/train-model/train.py` (plain Python, run on Kaggle — `adityajn105/flickr8k` dataset is pre-attached at `/kaggle/input/flickr8k`) cleans/tokenizes captions, extracts image features, trains with teacher forcing, and exports the decoder + encoder to TF.js plus `tokenizer.json`. **Blocked on**: running `train.py` on Kaggle and dropping `model.json`+shards, `encoder/model.json`+shards, and `tokenizer.json` into `ImageCaptioning/model/` — see `ImageCaptioning/model/README.md`. Once the model is in place, move this entry to Completed.
+- **Sentiment Analyzer** — type a movie review or any sentence, get real-time Positive/Negative classification. Model: Embedding → GlobalAveragePooling1D (or Bidirectional LSTM) → Dense → sigmoid, trained on the built-in Keras IMDB dataset (top 10k words). Web app (`SentimentAnalyzer/index.html`, `main.css`, `script.js`) tokenizes typed text client-side using `model/vocab.json` (lowercase, strip punctuation, split on whitespace, map to indices with OOV fallback, pad/truncate to the training sequence length) and runs the TF.js model, showing sentiment + a confidence bar. Training script is `SentimentAnalyzer/train-model/train.py` (plain Python, not a notebook — runs top-to-bottom on Colab/Kaggle). **Blocked on**: running `train.py` (no GPU locally, though not strictly required for this model) and dropping the exported `model.json` + weight shard + `vocab.json` into `SentimentAnalyzer/model/` — see `SentimentAnalyzer/model/README.md`. Once the model is in place, move this entry to Completed.
+- **Emojify** — type a short sentence, get the emoji that fits best (❤️ ⚾ 😄 😞 🍴). Model: Embedding (GloVe-initialized, 50d) → LSTM(64) → LSTM(32) → Dense softmax over 5 classes, trained on a small embedded dataset of ~180 hand-labeled sentences (no external dataset file needed). Web app (`Emojify/index.html`, `main.css`, `script.js`) tokenizes typed text client-side using `model/vocab.json` (lowercase, strip punctuation, split on whitespace, map to indices with OOV fallback, pad/truncate to `max_len`) and runs the TF.js model, showing the predicted emoji large plus a confidence score. Training script is `Emojify/train-model/train.py` (plain Python, not a notebook — runs top-to-bottom on Colab/Kaggle; tries to load GloVe from common Kaggle/Colab paths and falls back to random embeddings if not found so it never crashes). **Blocked on**: getting GloVe embeddings (`glove.6B.50d.txt`, e.g. via Kaggle's `glove6b50dtxt` dataset), running `train.py`, and dropping the exported `model.json` + weight shard + `vocab.json` into `Emojify/model/` — see `Emojify/model/README.md`. Once the model is in place, move this entry to Completed.
 
 ---
 
@@ -58,7 +70,6 @@ Classic DLS assignments, each turned into a clean notebook or deployed demo.
 - **Trigger word detection** — audio spectrogram → RNN; detect a keyword in a recorded clip
 - **Dinosaur name generator** — character-level RNN trained on dinosaur names; generates new names
 - **Jazz music generator** — LSTM trained on jazz MIDI; generate a short jazz solo (notebook)
-- **Emojify** — word embeddings (GloVe) map a sentence to the right emoji; deploy as a text input demo
 - **Machine translation** — attention-based seq2seq; translate short English phrases (notebook)
 - **Named entity recognition (NER)** — BiLSTM tags names, places, orgs in a sentence
 - **Trigger word detection with spectrograms** — visualize audio as spectrogram, run RNN inference
@@ -79,7 +90,6 @@ Classic DLS assignments, each turned into a clean notebook or deployed demo.
 - **Batch norm & dropout notebook** — show effect on training curves
 - **CNN feature visualization** — saliency maps, class activation maps (CAM) on any image
 - **Object detection** — fine-tune YOLO or Faster R-CNN on a custom dataset
-- **Image captioning** — CNN encoder + LSTM decoder; generate captions for uploaded photos
 - **GAN — image generation** — DCGAN on MNIST or CelebA; generate fake faces or digits
 - **U-Net image segmentation** — segment objects in an image pixel by pixel
 
@@ -214,7 +224,6 @@ A whole area that's missing from most course lists but essential in real ML work
 - **Sketch-to-label classifier** — QuickDraw dataset, recognize doodles
 
 ### Natural Language Processing (original ideas)
-- **Sentiment analyzer** — train on IMDB/Twitter data, deploy a text-input demo page
 - **Spam classifier** — classic Naive Bayes / logistic regression notebook
 - **Text summarizer** — extractive or abstractive summarization notebook (transformers)
 - **Language detector** — identify the language of a typed sentence

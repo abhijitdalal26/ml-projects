@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emojify — Sentence to Emoji</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1 class="main-title">EMOJIFY</h1>
+        <p class="subtitle">Turn a sentence into an emoji with word embeddings + LSTM</p>
+      </header>
+
+      <main class="input-area">
+        <textarea
+          id="sentence-input"
+          class="sentence-input"
+          rows="3"
+          maxlength="120"
+          placeholder="Type a short sentence, e.g. &quot;let's eat pizza tonight&quot;"
+        ></textarea>
+
+        <div class="controls">
+          <button id="predict-btn" class="btn btn-predict">Emojify</button>
+          <button id="clear-btn" class="btn btn-clear">Clear</button>
+        </div>
+
+        <p id="status-message" class="status-message"></p>
+      </main>
+
+      <section class="prediction-panel">
+        <div class="result-card">
+          <span class="label">PREDICTED EMOJI</span>
+          <div id="prediction-emoji">🙂</div>
+        </div>
+
+        <div class="preview-box">
+          <span class="label">CONFIDENCE</span>
+          <div id="confidence-text">--</div>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

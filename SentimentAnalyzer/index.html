@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentiment Analyzer</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1 class="main-title">SENTIMENT ANALYZER</h1>
+        <p class="subtitle">Type a movie review, get real-time sentiment</p>
+      </header>
+
+      <main class="input-area">
+        <textarea
+          id="review-input"
+          placeholder="Type a movie review or any sentence here..."
+          rows="6"
+        ></textarea>
+
+        <div class="controls">
+          <button id="analyze-btn" class="btn btn-clear">Analyze</button>
+        </div>
+
+        <p id="status-message" class="status-message"></p>
+      </main>
+
+      <section class="prediction-panel">
+        <div class="result-card">
+          <span class="label">SENTIMENT</span>
+          <div id="prediction-text">?</div>
+        </div>
+
+        <div class="confidence-box">
+          <span class="label">CONFIDENCE</span>
+          <div class="confidence-bar-track">
+            <div id="confidence-bar-fill" class="confidence-bar-fill"></div>
+          </div>
+          <span id="confidence-value">--</span>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

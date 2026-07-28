@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Captioning</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1 class="main-title">IMAGE CAPTIONING</h1>
+        <p class="subtitle">CNN encoder + LSTM decoder, running entirely in your browser</p>
+      </header>
+
+      <main class="upload-area">
+        <label id="drop-zone" class="drop-zone" for="file-input">
+          <img id="preview-img" class="preview-img" alt="" hidden />
+          <span id="drop-text" class="drop-text">Drop an image here or click to upload</span>
+        </label>
+        <input id="file-input" type="file" accept="image/*" hidden />
+
+        <div class="controls">
+          <button id="clear-btn" class="btn btn-clear">Clear</button>
+        </div>
+      </main>
+
+      <section class="caption-panel">
+        <span class="label">GENERATED CAPTION</span>
+        <div id="caption-text">Upload an image to get started</div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
