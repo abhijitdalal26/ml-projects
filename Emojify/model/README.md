@@ -13,30 +13,39 @@ will show a "model not trained yet" message until these files exist.
 
 All three are produced automatically by `train.py`.
 
-## How to generate them
+## How to generate them (Kaggle, recommended — clone and run, no pasting)
 
-1. Open `train-model/train.py` on Google Colab or Kaggle (paste cell-by-cell,
-   or upload and run `python train.py`).
-2. Get GloVe embeddings (either works):
-   - **Kaggle**: add the public dataset `glove6b50dtxt` to your notebook —
-     `train.py` auto-detects it at `/kaggle/input/glove6b50dtxt/glove.6B.50d.txt`.
-   - **Colab / local**: download and unzip manually:
-     ```
-     wget http://nlp.stanford.edu/data/glove.6B.zip
-     unzip glove.6B.zip -d glove6b
-     ```
-     then make sure `glove6b/glove.6B.50d.txt` is reachable from the script's
-     working directory (see `GLOVE_CANDIDATES` in `train.py`).
-   - If GloVe isn't found at all, `train.py` falls back to random embeddings
-     so the script still runs — accuracy will just be lower.
-3. Run the script top to bottom. It trains an LSTM classifier over 5 emoji
-   classes (love, baseball, smile, sad, food), evaluates it, and exports:
-   - `model.json` + weight shard(s) via `tensorflowjs_converter`
-     (`tensorflowjs.converters.save_keras_model`)
-   - `vocab.json`
-4. Copy/download `model.json`, the `group1-shard*.bin` file(s), and
-   `vocab.json` into this folder (`Emojify/model/`).
-5. Reload `Emojify/index.html` — the demo will pick the files up automatically.
+1. Create a new Kaggle Notebook.
+2. Settings -> Add Input -> search `glove6b50dtxt` -> add that public dataset.
+   `train.py` auto-detects it at `/kaggle/input/glove6b50dtxt/glove.6B.50d.txt`.
+3. In a single code cell:
+   ```
+   !git clone https://github.com/abhijitdalal26/ml-projects.git
+   %cd ml-projects/Emojify/train-model
+   !pip install -q tensorflowjs
+   !python train.py
+   ```
+4. `train.py` writes `model.json`, `group1-shard*.bin`, and `vocab.json`
+   directly into the cloned repo's `Emojify/model/`, and also zips them to
+   `/kaggle/working/emojify_model.zip` so they're easy to grab from the
+   notebook's **Output** tab.
+5. Download `emojify_model.zip`, unzip it, and drop the 3 files into this
+   folder (`Emojify/model/`) in your local repo.
+6. Reload `Emojify/index.html` — the demo will pick the files up
+   automatically.
+
+## Colab / local alternative
+
+Same script, but GloVe needs fetching manually and there's no auto-zip step:
+```
+wget http://nlp.stanford.edu/data/glove.6B.zip
+unzip glove.6B.zip -d glove6b
+```
+Make sure `glove6b/glove.6B.50d.txt` is reachable from the script's working
+directory (see `GLOVE_CANDIDATES` in `train.py`), then run `python train.py`
+from inside `train-model/` — it writes straight into `../model/`. If GloVe
+isn't found at all, the script falls back to random embeddings so it still
+runs (accuracy will just be lower).
 
 Once this is done, update the root `D:/ML-Projects/CLAUDE.md` to move Emojify
 from "In progress" to "Completed".

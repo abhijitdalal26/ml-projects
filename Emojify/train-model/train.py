@@ -5,8 +5,20 @@
 # as `python train.py` or pasted cell-by-cell into a notebook.
 #
 # ---------------------------------------------------------------------------
-# pip install commands (uncomment / run in a cell if packages are missing):
-# !pip install -q tensorflow numpy scikit-learn tensorflowjs
+# KAGGLE QUICKSTART — clone-and-run, no copy/paste
+#   1. New Notebook -> Settings -> Add Input -> search "glove6b50dtxt" ->
+#      add that dataset (public, by watts2 / thanakomsn).
+#   2. In a code cell:
+#        !git clone https://github.com/abhijitdalal26/ml-projects.git
+#        %cd ml-projects/Emojify/train-model
+#        !pip install -q tensorflowjs
+#        !python train.py
+#   3. This writes model.json, group1-shard*.bin, and vocab.json straight
+#      into the cloned repo's Emojify/model/ — and also zips them to
+#      /kaggle/working/emojify_model.zip so you can grab them from the
+#      notebook's Output tab without digging through the clone.
+#   4. Download emojify_model.zip, unzip it, drop the 3 files into
+#      Emojify/model/ in your local repo, reload Emojify/index.html.
 # ---------------------------------------------------------------------------
 
 import os
@@ -303,6 +315,10 @@ for s, p in zip(sample_sentences, preds):
 # ---------------------------------------------------------------------------
 import json
 
+# Always write into the repo's own Emojify/model/ folder, relative to this
+# script's location (train-model/). This works whether the repo was cloned
+# into /kaggle/working, pulled in Colab, or run locally — no path surgery
+# needed, just `cd Emojify/train-model && python train.py`.
 MODEL_DIR = "../model"
 os.makedirs(MODEL_DIR, exist_ok=True)
 
@@ -317,7 +333,7 @@ with open(os.path.join(MODEL_DIR, "vocab.json"), "w", encoding="utf8") as f:
 print(f"Saved vocab.json to {MODEL_DIR}/vocab.json")
 
 # Also save a Keras model file in case tfjs conversion needs to be re-run later
-keras_model_path = os.path.join(MODEL_DIR, "emojify_keras_model")
+keras_model_path = os.path.join(MODEL_DIR, "emojify_keras_model.keras")
 model.save(keras_model_path)
 print(f"Saved Keras model to {keras_model_path}")
 
@@ -338,3 +354,23 @@ except ImportError:
         "  import tensorflowjs as tfjs\n"
         "  tfjs.converters.save_keras_model(model, '../model')"
     )
+
+# ---------------------------------------------------------------------------
+# 10. On Kaggle, also zip model.json + weight shard(s) + vocab.json into
+#     /kaggle/working/emojify_model.zip so they show up in the Output tab
+#     as a single one-click download (the clone itself isn't listed there).
+# ---------------------------------------------------------------------------
+if os.path.isdir("/kaggle/working"):
+    import shutil
+
+    zip_files = [
+        f
+        for f in os.listdir(MODEL_DIR)
+        if f == "model.json" or f == "vocab.json" or f.startswith("group1-shard")
+    ]
+    staging_dir = "/kaggle/working/emojify_model"
+    os.makedirs(staging_dir, exist_ok=True)
+    for f in zip_files:
+        shutil.copy(os.path.join(MODEL_DIR, f), os.path.join(staging_dir, f))
+    zip_path = shutil.make_archive("/kaggle/working/emojify_model", "zip", staging_dir)
+    print(f"Zipped model files to {zip_path} — download from the Output tab.")
